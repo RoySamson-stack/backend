@@ -1,0 +1,473 @@
+{
+  "info": {
+    "name": "API Endpoints Collection",
+    "description": "Collection of API endpoints for user management, reports, notifications, and analytics",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "User Endpoints",
+      "item": [
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users"]
+            }
+          }
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "login"]
+            }
+          }
+        },
+        {
+          "name": "Get User Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/:userId",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", ":userId"],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update User Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Updated\",\n  \"email\": \"john.updated@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/:userId",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", ":userId"],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get User Reports",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/:userId/reports",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", ":userId", "reports"],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reports Endpoints",
+      "item": [
+        {
+          "name": "Create Report",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Road Issue Report\",\n  \"description\": \"Pothole on Main Street\",\n  \"category\": \"infrastructure\",\n  \"location\": {\n    \"latitude\": -1.2921,\n    \"longitude\": 36.8219\n  },\n  \"priority\": \"medium\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reports",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports"]
+            }
+          }
+        },
+        {
+          "name": "Get All Reports",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/reports?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Trending Reports",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/trending",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports", "trending"]
+            }
+          }
+        },
+        {
+          "name": "Get Report By ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/:reportId",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports", ":reportId"],
+              "variable": [
+                {
+                  "key": "reportId",
+                  "value": "{{reportId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Report Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"in-progress\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/:reportId/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports", ":reportId", "status"],
+              "variable": [
+                {
+                  "key": "reportId",
+                  "value": "{{reportId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Vote on Report",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"voteType\": \"upvote\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/:reportId/vote",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports", ":reportId", "vote"],
+              "variable": [
+                {
+                  "key": "reportId",
+                  "value": "{{reportId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Report",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/:reportId",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reports", ":reportId"],
+              "variable": [
+                {
+                  "key": "reportId",
+                  "value": "{{reportId}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notifications Endpoints",
+      "item": [
+        {
+          "name": "Get User Notifications",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/:userId/notifications",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", ":userId", "notifications"],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Mark Notification Read",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"isRead\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/notifications/:notificationId",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "notifications", ":notificationId"],
+              "variable": [
+                {
+                  "key": "notificationId",
+                  "value": "{{notificationId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Mark All Notifications Read",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"markAllAsRead\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/:userId/notifications/read-all",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", ":userId", "notifications", "read-all"],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Analytics Endpoints",
+      "item": [
+        {
+          "name": "Get Analytics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/analytics/reports?period=30d",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "analytics", "reports"],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "30d"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "health"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "reportId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "notificationId",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
